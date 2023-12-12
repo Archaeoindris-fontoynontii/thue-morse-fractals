@@ -1,10 +1,13 @@
-console.log("Hello World!")
 const canvas = document.querySelector("canvas")
-console.log(canvas)
 const ctx = canvas.getContext("2d")
-const shift = document.getElementById("shift")
+const shiftr = document.getElementById("shift")
 const shiftout = document.getElementById("shiftout")
-shiftout.textContent = shift.value
+const shiftn = document.getElementById("shiftn")
+const maxir = document.getElementById("maxir")
+const maxin = document.getElementById("maxin")
+const maxiout = document.getElementById("maxiout")
+shiftout.textContent = shiftr.value
+maxiout.textContent = maxir.value
 function ThueMorse(n) {
     if (n == 0) {
         return [0]
@@ -49,7 +52,7 @@ class Turtle {
 
 var tl = [new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle()]
 const maxT = 8
-const maxi = 2**18
+var maxi = 2**16
 for (var ti = 0; ti < maxT; ti++) {
     tl[ti].left(Math.floor(ti/2)*90)
 }
@@ -80,13 +83,24 @@ function oneLoop(number,i) {
     }
 
 }
-shift.addEventListener("input", ()=>shiftout.textContent=shift.value)
+function updateShift(val){
+    shiftr.value=val
+    shiftout.textContent=shiftr.value
+    shiftn.value=shiftr.value
 
+}
+function updateMaxir(val){
+    maxir.value=val
+    maxiout.textContent=maxir.value
+    maxin.value=maxir.value
+}
+shiftr.addEventListener("input", ()=>updateShift(shiftr.value))
+shiftn.addEventListener("input",()=>updateShift(shiftn.value))
+maxir.addEventListener("input",()=>updateMaxir(maxir.value))
+maxin.addEventListener("input",()=>updateMaxir(maxin.value))
 function anim(number,i){
-    console.log(shift.value)
-    // if (number!=shift.nodeValue()) {
-    //     number = shift.nodeValue()
-    //     for (var _ = 0; _ < maxi; _++) {
+
+    //     for (var _ = 0; _ < maxi/2**7; _++) {
     //         if (i>maxi){
     //             i=0
     //             number+=2
@@ -94,20 +108,24 @@ function anim(number,i){
     //         oneLoop(number,i)
     //         i++
     // }
-    // }
-    
-    for (var _ = 0; _ < maxi; _++) {
+    var anim_num = 0
+    while (anim_num < maxi) {
         if (i>maxi){
             i=0
-            number=parseInt(shift.value)
+            number=parseInt(shiftr.value)
+            maxi=2**parseInt(maxir.value)
+            anim_num=0
         }
         oneLoop(number,i)
         i++
+        anim_num++
     }
     
     ctx.strokeStyle = "hsl(0 100% 100% / 100%)"
     ctx.strokeText((number>>>0).toString(2), 10, 20)
-    setTimeout(() => anim(number,i),0)
+    console.log(anim_num)
+    console.log(i)
+    setTimeout(() => anim(number,i),1)
     
 }
 setTimeout(() => anim(8125,0),1)
