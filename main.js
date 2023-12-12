@@ -6,8 +6,13 @@ const shiftn = document.getElementById("shiftn")
 const maxir = document.getElementById("maxir")
 const maxin = document.getElementById("maxin")
 const maxiout = document.getElementById("maxiout")
+const animRatr = document.getElementById("animRatr")
+const animRatn = document.getElementById("animRatn")
+const animRatout = document.getElementById("animRatout")
+
 shiftout.textContent = shiftr.value
 maxiout.textContent = maxir.value
+animRatout.textContent = animRatr.value
 function ThueMorse(n) {
     if (n == 0) {
         return [0]
@@ -53,12 +58,13 @@ class Turtle {
 var tl = [new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle()]
 const maxT = 8
 var maxi = 2**16
+var animRat = 1
 for (var ti = 0; ti < maxT; ti++) {
     tl[ti].left(Math.floor(ti/2)*90)
 }
 
 
-ctx.fillStyle = "hsl(0 0% 0% / 100%)"
+ctx.fillStyle = "hsl(0 0% 100% / 100%)"
 ctx.fillRect(0,0,width,height)
 
 function oneLoop(number,i) {
@@ -69,10 +75,10 @@ function oneLoop(number,i) {
             tl[ti].angle=0
             tl[ti].left(Math.floor(ti/2)*90)
         }
-        ctx.fillStyle = "hsl(0 0% 0% / 100%)"
+        ctx.fillStyle = "hsl(0 0% 100% / 100%)"
         ctx.clearRect(0,0,width,height)
         ctx.fillRect(0,0,width,height)
-        ctx.strokeStyle = "hsl(0 100% 100% / 100%)"
+        ctx.strokeStyle = "hsl(0 100% 0% / 100%)"
         ctx.strokeText(number, 10, 10)
 
     }
@@ -94,10 +100,17 @@ function updateMaxir(val){
     maxiout.textContent=maxir.value
     maxin.value=maxir.value
 }
+function updateAnimRatr(val){
+    animRatr.value = val
+    animRatout.textContent= animRatr.value
+    animRatn.value = animRatr.value
+}
 shiftr.addEventListener("input", ()=>updateShift(shiftr.value))
 shiftn.addEventListener("input",()=>updateShift(shiftn.value))
 maxir.addEventListener("input",()=>updateMaxir(maxir.value))
 maxin.addEventListener("input",()=>updateMaxir(maxin.value))
+animRatr.addEventListener("input",()=>updateAnimRatr(animRatr.value))
+animRatn.addEventListener("input",()=>updateAnimRatr(animRatn.value))
 function anim(number,i){
 
     //     for (var _ = 0; _ < maxi/2**7; _++) {
@@ -109,7 +122,7 @@ function anim(number,i){
     //         i++
     // }
     var anim_num = 0
-    while (anim_num < maxi) {
+    while (anim_num < maxi/2**animRatr.value) {
         if (i>maxi){
             i=0
             number=parseInt(shiftr.value)
@@ -121,7 +134,7 @@ function anim(number,i){
         anim_num++
     }
     
-    ctx.strokeStyle = "hsl(0 100% 100% / 100%)"
+    ctx.strokeStyle = "hsl(0 100% 0% / 100%)"
     ctx.strokeText((number>>>0).toString(2), 10, 20)
     console.log(anim_num)
     console.log(i)
