@@ -13,9 +13,13 @@ const colr = document.getElementById("colr")
 const coln = document.getElementById("coln")
 const colout = document.getElementById("colout")
 shiftout.textContent = shiftr.value
+shiftn.value = shiftr.value
 maxiout.textContent = maxir.value
+maxin.value = maxir.value
 animRatout.textContent = animRatr.value
+animRatn.value = animRatr.value
 colout.textContent = colr.value
+coln.value = colr.value
 
 function ThueMorse(n) {
     if (n == 0) {
@@ -58,7 +62,30 @@ class Turtle {
         this.angle -= angle * Math.PI / 180
     }
 }
+function addPrime(pri){
+    var prime = pri[pri.length-1]+2
+    var initlen = pri.length
+    while (pri.length == initlen){
+        console.log(pri)
+        console.log(prime)
+        var isPrime = true
+        for (var im = 0; im <= pri.length; im++){
+            if (prime % pri[im] == 0){
+                isPrime = false
+                break
+            }
+        }
+        if (isPrime){
+            pri.push(prime)
+        }
+        prime+=2
+    }
+    return pri
+    }
+var primearr = [2,3]
 
+
+console.log(primearr)
 var tl = [new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle()]
 const maxT = 8
 var maxi = 2**16
@@ -67,7 +94,8 @@ for (var ti = 0; ti < maxT; ti++) {
     tl[ti].left(Math.floor(ti/2)*90)
 }
 
-
+var diff = true
+var animate = false
 ctx.fillStyle = "hsl(0 0% 100% / 100%)"
 ctx.fillRect(0,0,width,height)
 
@@ -89,7 +117,12 @@ function oneLoop(number,i) {
     setColor(i/2**parseInt(colr.value))
     for (var ti = 0; ti < maxT; ti++) {
         tl[ti].forward(2)
-        tl[ti].right(((-1)**(ti%2))*90*(Math.abs(stri[i]-stri[i+number])))
+        if (diff){
+            tl[ti].right(((-1)**(ti%2))*90*(Math.abs(stri[i]-stri[i+number])))
+        } else{
+            tl[ti].right(((-1)**(ti%2))*90*(1-Math.abs(stri[i]-stri[i+number])))
+        }
+
     }
 
 }
@@ -136,7 +169,13 @@ function anim(number,i){
     while (anim_num < Math.min(maxi,2**animRatr.value)) {
         if (i>maxi){
             i=0
-            number=parseInt(shiftr.value)
+            if (animate) {
+                addPrime(primearr)
+                number = primearr[primearr.length-1]
+            }
+            else {
+                number=parseInt(shiftr.value)
+            }
             maxi=2**parseInt(maxir.value)
             anim_num=0
         }
