@@ -9,10 +9,14 @@ const maxiout = document.getElementById("maxiout")
 const animRatr = document.getElementById("animRatr")
 const animRatn = document.getElementById("animRatn")
 const animRatout = document.getElementById("animRatout")
-
+const colr = document.getElementById("colr")
+const coln = document.getElementById("coln")
+const colout = document.getElementById("colout")
 shiftout.textContent = shiftr.value
 maxiout.textContent = maxir.value
 animRatout.textContent = animRatr.value
+colout.textContent = colr.value
+
 function ThueMorse(n) {
     if (n == 0) {
         return [0]
@@ -82,7 +86,7 @@ function oneLoop(number,i) {
         ctx.strokeText(number, 10, 10)
 
     }
-    setColor(i/2**13)
+    setColor(i/2**parseInt(colr.value))
     for (var ti = 0; ti < maxT; ti++) {
         tl[ti].forward(2)
         tl[ti].right(((-1)**(ti%2))*90*(Math.abs(stri[i]-stri[i+number])))
@@ -105,12 +109,19 @@ function updateAnimRatr(val){
     animRatout.textContent= animRatr.value
     animRatn.value = animRatr.value
 }
+function updateColr(val){
+    colr.value = val
+    colout.textContent= colr.value
+    coln.value = colr.value
+}
 shiftr.addEventListener("input", ()=>updateShift(shiftr.value))
 shiftn.addEventListener("input",()=>updateShift(shiftn.value))
 maxir.addEventListener("input",()=>updateMaxir(maxir.value))
 maxin.addEventListener("input",()=>updateMaxir(maxin.value))
 animRatr.addEventListener("input",()=>updateAnimRatr(animRatr.value))
 animRatn.addEventListener("input",()=>updateAnimRatr(animRatn.value))
+colr.addEventListener("input",()=>updateColr(colr.value))
+coln.addEventListener("input",()=>updateColr(coln.value))
 function anim(number,i){
 
     //     for (var _ = 0; _ < maxi/2**7; _++) {
