@@ -88,7 +88,7 @@ function oneLoop(number,i) {
     }
     setColor(i/2**parseInt(colr.value))
     for (var ti = 0; ti < maxT; ti++) {
-        tl[ti].forward(1)
+        tl[ti].forward(2)
         tl[ti].right(((-1)**(ti%2))*90*(Math.abs(stri[i]-stri[i+number])))
     }
 
