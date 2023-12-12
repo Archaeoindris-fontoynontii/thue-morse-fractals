@@ -88,7 +88,7 @@ function oneLoop(number,i) {
     }
     setColor(i/2**parseInt(colr.value))
     for (var ti = 0; ti < maxT; ti++) {
-        tl[ti].forward(2)
+        tl[ti].forward(1)
         tl[ti].right(((-1)**(ti%2))*90*(Math.abs(stri[i]-stri[i+number])))
     }
 
@@ -96,23 +96,23 @@ function oneLoop(number,i) {
 function updateShift(val){
     shiftr.value=val
     shiftout.textContent=shiftr.value
-    shiftn.value=shiftr.value
+    shiftn.value=val
 
 }
 function updateMaxir(val){
     maxir.value=val
     maxiout.textContent=maxir.value
-    maxin.value=maxir.value
+    maxin.value=val
 }
 function updateAnimRatr(val){
     animRatr.value = val
     animRatout.textContent= animRatr.value
-    animRatn.value = animRatr.value
+    animRatn.value = val
 }
 function updateColr(val){
     colr.value = val
     colout.textContent= colr.value
-    coln.value = colr.value
+    coln.value = val
 }
 shiftr.addEventListener("input", ()=>updateShift(shiftr.value))
 shiftn.addEventListener("input",()=>updateShift(shiftn.value))
@@ -133,7 +133,7 @@ function anim(number,i){
     //         i++
     // }
     var anim_num = 0
-    while (anim_num < maxi/2**animRatr.value) {
+    while (anim_num < Math.min(maxi,2**animRatr.value)) {
         if (i>maxi){
             i=0
             number=parseInt(shiftr.value)
@@ -141,15 +141,15 @@ function anim(number,i){
             anim_num=0
         }
         oneLoop(number,i)
+        if (i==0){
+            ctx.strokeStyle = "hsl(0 100% 0% / 100%)"
+            ctx.strokeText((number>>>0).toString(2), 10, 20)
+        }
         i++
         anim_num++
     }
     
-    ctx.strokeStyle = "hsl(0 100% 0% / 100%)"
-    ctx.strokeText((number>>>0).toString(2), 10, 20)
-    console.log(anim_num)
-    console.log(i)
-    setTimeout(() => anim(number,i),1)
+    setTimeout(() => anim(number,i),30)
     
 }
-setTimeout(() => anim(8125,0),1)
+setTimeout(() => anim(1,0),1)
