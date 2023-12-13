@@ -32,8 +32,8 @@
                     <p>2^_ steps per color cycle: <output id="colout"></output></p>
                 </div>
                 <div style="display:flex">
-                    <input type="range" id="stepDistr" name="stepDistr" min=".6" max="8" value="2" step=".2"/>
-                    <input type="number" id="stepDistn" name="stepDistr" min=".6" max="8"/>
+                    <input type="range" id="stepDistr" name="stepDistr" min="1" max="8" value="2" step="1"/>
+                    <input type="number" id="stepDistn" name="stepDistr" min="1" max="8"/>
                     <p>length of each segment: <output id="stepDistout"></output></p>
                 </div>
                         <p>Rotate when i and i+shift are:</p>
@@ -48,7 +48,7 @@
                         
                             <p> Octants: </p>
                         <div>
-                            <input type="radio" id="eight" name="octant" value="8">
+                            <input type="radio" id="eight" name="octant" value="8" checked>
                             <label for="eight">8</label>
                             <input type="radio" id="one" name="octant" value="1">
                             <label for="one">1</label>
