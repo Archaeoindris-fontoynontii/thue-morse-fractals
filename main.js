@@ -12,6 +12,13 @@ const animRatout = document.getElementById("animRatout")
 const colr = document.getElementById("colr")
 const coln = document.getElementById("coln")
 const colout = document.getElementById("colout")
+const stepDistr = document.getElementById("stepDistr")
+const stepDistn = document.getElementById("stepDistn")
+const stepDistout = document.getElementById("stepDistout")
+const diffb = document.getElementById("different")
+const sameb = document.getElementById("same")
+const safec = document.getElementById("safe")
+const octant = document.getElementById("one")
 shiftout.textContent = shiftr.value
 shiftn.value = shiftr.value
 maxiout.textContent = maxir.value
@@ -20,6 +27,8 @@ animRatout.textContent = animRatr.value
 animRatn.value = animRatr.value
 colout.textContent = colr.value
 coln.value = colr.value
+stepDistn.value = stepDistr.value
+stepDistout.textContent = stepDistr.value
 
 function ThueMorse(n) {
     if (n == 0) {
@@ -87,7 +96,7 @@ var primearr = [2,3]
 
 console.log(primearr)
 var tl = [new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle(), new Turtle()]
-const maxT = 8
+var maxT = 8
 var maxi = 2**16
 var animRat = 1
 for (var ti = 0; ti < maxT; ti++) {
@@ -116,7 +125,7 @@ function oneLoop(number,i) {
     }
     setColor(i/2**parseInt(colr.value))
     for (var ti = 0; ti < maxT; ti++) {
-        tl[ti].forward(2)
+        tl[ti].forward(parseInt(stepDistr.value))
         if (diff){
             tl[ti].right(((-1)**(ti%2))*90*(Math.abs(stri[i]-stri[i+number])))
         } else{
@@ -147,6 +156,34 @@ function updateColr(val){
     colout.textContent= colr.value
     coln.value = val
 }
+function updateStepDistr(val){
+    stepDistr.value = val
+    stepDistout.textContent= stepDistr.value
+    stepDistn.value = val
+
+}
+function updateSafety(){
+    if (safec.checked){
+        if (diffb.checked){
+            var val = parseInt(shiftr.value)
+            val-=val%2
+            val++
+            shiftr.step=2
+            shiftr.value=val
+            updateShift(shiftr.value)
+        } else {
+            var val = parseInt(shiftr.value)
+            val-=val%4
+            val+=1
+            shiftr.step=4
+            updateShift(shiftr.value)
+        
+        }
+    }
+    else {
+        shiftr.step=1
+    }
+}
 shiftr.addEventListener("input", ()=>updateShift(shiftr.value))
 shiftn.addEventListener("input",()=>updateShift(shiftn.value))
 maxir.addEventListener("input",()=>updateMaxir(maxir.value))
@@ -155,6 +192,12 @@ animRatr.addEventListener("input",()=>updateAnimRatr(animRatr.value))
 animRatn.addEventListener("input",()=>updateAnimRatr(animRatn.value))
 colr.addEventListener("input",()=>updateColr(colr.value))
 coln.addEventListener("input",()=>updateColr(coln.value))
+stepDistr.addEventListener("input",()=>updateStepDistr(stepDistr.value))
+stepDistn.addEventListener("input",()=>updateStepDistr(stepDistn.value))
+safec.addEventListener("input", updateSafety)
+diffb.addEventListener("input", updateSafety)
+sameb.addEventListener("input", updateSafety)
+
 function anim(number,i){
 
     //     for (var _ = 0; _ < maxi/2**7; _++) {
@@ -175,6 +218,8 @@ function anim(number,i){
             }
             else {
                 number=parseInt(shiftr.value)
+                diff=diffb.checked
+                maxT=octant.checked?1:8
             }
             maxi=2**parseInt(maxir.value)
             anim_num=0

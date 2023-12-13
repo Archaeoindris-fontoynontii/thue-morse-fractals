@@ -1,16 +1,20 @@
 <html>
     <head>
-
+        
     </head>
     <body>
         <div style="display:flex">
-
+            
             <canvas id="canvas" width="800" height="800"></canvas>
             <div>
                 <div style="display:flex">
                     <input type="range" id="shift" name="shift" min="1" max="10001" value="1" step="2"/>
                     <input type="number" id="shiftn" name="shiftn" min="1" max="10001"/>
                     <p>Shift: <output id="shiftout"></output></p>
+                </div>
+                <div>
+                    <input type="checkbox" id="safe" name="safe" value="safe" checked>
+                    <label for="safe">Restrict shift to good values</label>
                 </div>
                 <div style="display:flex">
                     <input type="range" id="maxir" name="maxir" min="1" max="20" value="16" step="1"/>
@@ -27,8 +31,28 @@
                     <input type="number" id="coln" name="coln" min="1" max="20"/>
                     <p>2^_ steps per color cycle: <output id="colout"></output></p>
                 </div>
-            </div>
-        </div>
+                <div style="display:flex">
+                    <input type="range" id="stepDistr" name="stepDistr" min=".6" max="8" value="2" step=".2"/>
+                    <input type="number" id="stepDistn" name="stepDistr" min=".6" max="8"/>
+                    <p>length of each segment: <output id="stepDistout"></output></p>
+                </div>
+                        <p>Rotate when i and i+shift are:</p>
+                        <div>
+                            <input type="radio" id="different" name="rWhen" value="diff" checked>
+                            <label for="different">Different</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="same" name="rWhen" value="same">
+                            <label for="same">Same</label>
+                        </div>
+                        
+                            <p> Octants: </p>
+                        <div>
+                            <input type="radio" id="eight" name="octant" value="8">
+                            <label for="eight">8</label>
+                            <input type="radio" id="one" name="octant" value="1">
+                            <label for="one">1</label>
+                        </div>
             
         <script src="./main.js"></script>
     </body>
