@@ -5,11 +5,12 @@
     <body>
         <div style="display:flex">
             
-            <canvas id="canvas" width="800" height="800"></canvas>
+            <canvas id="canvas" width="1000" height="800" style="background-color:white"></canvas>
             <div>
                 <div style="display:flex">
-                    <input type="range" id="shift" name="shift" min="1" max="10001" value="1" step="2"/>
-                    <input type="number" id="shiftn" name="shiftn" min="1" max="10001"/>
+                    <input type="range" id="shift" name="shift" min="1" max="10000001" value="87381" step="2"/>
+                    <input type="number" id="shiftn" name="shiftn" min="1" max="100001"/>
+                    <input type="text" id="shiftbn" name="shiftbn" />
                     <p>Shift: <output id="shiftout"></output></p>
                 </div>
                 <div>
@@ -17,23 +18,31 @@
                     <label for="safe">Restrict shift to good values</label>
                 </div>
                 <div style="display:flex">
-                    <input type="range" id="maxir" name="maxir" min="1" max="20" value="16" step="1"/>
-                    <input type="number" id="maxin" name="maxin" min="1" max="20"/>
+                    <input type="number" id="binSn" name="binSn" min="0" max="1000001" value="01"/>
+                    <p>string to repeat</p>
+                </div>
+                <div style="display:flex"> 
+                    <input type="number" id="binSNumn" name="binSNumn" min="0" max="100" value="01"/>
+                    <p>repeats of string</p>
+                </div>
+                <div style="display:flex">
+                    <input type="range" id="maxir" name="maxir" min="1" max="25" value="16" step="1"/>
+                    <input type="number" id="maxin" name="maxin" min="1" max="25"/>
                     <p>Iterations: <output id="maxiout"></output></p>
                 </div>
                 <div style="display:flex">
-                    <input type="range" id="animRatr" name="animRatr" min="0" max="20" value="7" step="1"/>
-                    <input type="number" id="animRatn" name="animRatn" min="0" max="20"/>
+                    <input type="range" id="animRatr" name="animRatr" min="0" max="25" value="7" step="1"/>
+                    <input type="number" id="animRatn" name="animRatn" min="0" max="25"/>
                     <p>2^_ steps per frame: <output id="animRatout"></output></p>
                 </div>
                 <div style="display:flex">
-                    <input type="range" id="colr" name="colr" min="3" max="20" value="13" step="1"/>
+                    <input type="range" id="colr" name="colr" min="3" max="20" value="14" step="1"/>
                     <input type="number" id="coln" name="coln" min="1" max="20"/>
                     <p>2^_ steps per color cycle: <output id="colout"></output></p>
                 </div>
                 <div style="display:flex">
-                    <input type="range" id="stepDistr" name="stepDistr" min="1" max="8" value="2" step="1"/>
-                    <input type="number" id="stepDistn" name="stepDistr" min="1" max="8"/>
+                    <input type="range" id="stepDistr" name="stepDistr" min="1" max="32" value="1" step="1"/>
+                    <input type="number" id="stepDistn" name="stepDistr" min="1" max="32"/>
                     <p>length of each segment: <output id="stepDistout"></output></p>
                 </div>
                         <p>Rotate when i and i+shift are:</p>
@@ -52,6 +61,10 @@
                             <label for="eight">8</label>
                             <input type="radio" id="one" name="octant" value="1">
                             <label for="one">1</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="autos" name="autos" value="autos" checked/>
+                            <label for="autos">Auto color+scale</label>
                         </div>
             
         <script src="./main.js"></script>
